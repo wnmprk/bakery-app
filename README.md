@@ -1,6 +1,6 @@
 # bakery-app: built with angular, html, css, and express
 
-[http://i.imgur.com/LedNFle.png]
+![](http://i.imgur.com/LedNFle.png)
 
 ## Features: 
 - [x] Add items to cart
