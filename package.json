@@ -1,0 +1,17 @@
+{
+  "name": "kontor",
+  "version": "1.0.0",
+  "description": "bakery app",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -e js,html,css ./server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jessica Wonmi Park",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.3",
+    "express": "^4.13.4",
+    "sweetalert": "^1.1.3"
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kontor Bakery</title>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="node_modules/sweetalert/dist/sweetalert.css">
+        <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="node_modules/angular/angular.js" defer></script>
+        <script src="app.js" defer></script> 
+    </head>
+    <body>
+        <h1>KONTOR'S BAKERY</h1>
+        <div ng-app="BakeryApp" class='bakery'>
+            <div ng-controller="MainController">
+                <div class='all-goodies'>
+                    <div class='one-goodie' ng-repeat='goodie in goodies'>
+                        <img ng-src='{{ goodie.imageURL }}' />
+                        <div class='goodies-info'>
+                            <h4>{{ goodie.name | uppercase }}</h4>
+                            <p class="price">{{ goodie.price | currency }}</p>
+                            <p ng-show='goodie.bulkPricing === null'>SORRY, NO BULK PRICING</p>
+                            <p ng-show='goodie.bulkPricing'>OR GET {{ goodie.bulkPricing.amount }} FOR {{ goodie.bulkPricing.totalPrice | currency}}!</p>
+                            <button class='add' ng-click='addToCart(goodie)'>ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+                <div class='shopping-cart'>
+                    <h2>CART</h2>
+                    <hr>
+                    <div class='whole-cart'>
+                    <div class='current-cart' ng-repeat='(key, value) in cart'>
+                        <div class='one-item' ng-hide='value.totalPrice === 0'>
+                            <p class='item-info'>{{ value.name | uppercase }} <span ng-show='value.quantity > 0'> x </span> {{ value.quantity }}</p>
+                            <p class='item-total'>{{ value.totalPrice | currency }}<span class='clear' ng-click='clearItem(value)'> x</span></p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class='bottom'>
+                        <p>TOTAL : <span class='total'>{{ purchaseTotal | currency }}</span></p>
+                        <button class='checkout-btn' ng-click='checkoutOrder()'>CHECKOUT</button>
+                        <button class='checkout-btn' ng-click='clearCart()'>CLEAR CART</button>
+                        <div class='promo-code'>
+                            <input type='text' placeholder="ENTER PROMO CODE"></input>
+                            <button type='submit' class='promo-btn' ng-click='enterPromo()'>PROMO</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

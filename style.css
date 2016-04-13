@@ -1,0 +1,181 @@
+* {
+	font-family: 'Raleway', sans-serif;
+	letter-spacing: 2px;
+}
+
+body {
+	background-color: #4fc1c7;
+	color: white;
+}
+
+p {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+h1 {
+	letter-spacing: 10px;
+	margin-left: 10%;
+}
+
+hr {
+	border-color: white;
+	width: 300px;
+	margin: 0 50px 20px 50px;
+}
+
+button {
+	color: white;
+	border: 2px solid white;
+	cursor: pointer;
+	font-size: 15px;
+	padding: 10px;
+	border-radius: 3px;
+	background-color: transparent;
+}
+
+a:active {
+	color: white;
+	background-color: transparent;
+}
+
+button:focus, input:focus {
+	outline: none;
+}
+
+button:hover {
+	background-color: white;
+	color: #4fc1c7;
+}
+
+button.add {
+	margin-top: 5px;
+}
+
+.bakery {
+	width: 80%;
+	margin: auto;
+	margin-top: 5%;
+}	
+
+.all-goodies {
+	float: left;
+	margin-bottom: 20px;
+}
+
+.one-goodie {
+	width: 470px;
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+
+.one-goodie img {
+	float: left;
+	height: 140px;
+	width: 140px;
+	margin-right: 20px;
+	border: 5px solid white;
+}
+
+.one-goodie img:hover {
+	opacity: 0.7;
+}
+
+.one-goodie h4, .one-goodie p {
+	margin: 0;
+}
+
+.one-goodie h4 {
+	padding-top: 10px;
+}
+
+.shopping-cart {
+	float: right;
+	width: 400px;
+	height: 500px;
+	border: 3px solid white;
+	padding: 10px;
+	text-align: center;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.whole-cart {
+	height: 250px;
+}
+
+@media (max-width: 1135px) {
+	.shopping-cart {
+		float: left;
+	}
+	.bakery {
+		width: 50%;
+		margin: auto;
+		margin-top: 50px;
+	}
+	h1 {
+		text-align: center;
+		margin: 0;
+	}
+}
+
+div.current-cart {
+	text-align: left;
+	overflow: hidden;
+	margin: 10px 0;
+	padding-bottom: 10px;
+}
+
+h2.current-cart {
+	margin-top: 15px;
+}
+
+.one-item {
+	margin: 10px;
+}
+
+h2 {
+	margin-bottom: 10px;
+}
+
+p.item-info {
+	float: left;
+	margin: 0;
+}
+
+p.item-total {
+	float: right;
+	margin: 0;
+}
+
+span.clear {
+	cursor: pointer;
+}
+
+span.clear:hover {
+	color: red;
+}
+
+input {
+	border: 2px solid white;
+	margin-right: 2px;
+	height: 30px;
+	width: 200px;
+	padding-left: 10px;
+	background-color: #44a0a5;
+	border-radius: 3px;
+}
+
+input[type=text] {
+	font-size: 15px;
+	padding: 5px 5px 5px 10px;
+	color: white;
+}
+
+.promo-code {
+	margin: 10px 0px;
+}
+
+div.bottom {
+	bottom: 0;
+}
