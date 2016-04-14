@@ -1,4 +1,4 @@
-# bakery-app: built with angular, html, css, and express
+# bakery-app: built with angular, express, and html/css
 
 ![](http://i.imgur.com/LedNFle.png)
 
