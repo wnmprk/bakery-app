@@ -1,7 +1,6 @@
 var app = angular.module('BakeryApp', []);
 
 app.controller('MainController', function ($scope, $http) {
-
 	// get data from json file
 	$http.get('products-data.json')
 	.then(function(res){
@@ -10,10 +9,10 @@ app.controller('MainController', function ($scope, $http) {
 
 	// instantiate a cart
 	$scope.cart = {};
-
+	
 	// cart purchase total starts a 0
 	$scope.purchaseTotal = 0;
-
+	
 	// add item to cart function
 	$scope.addToCart = function (goodie) {
 		// if unique item is added to cart for the first time
@@ -26,31 +25,30 @@ app.controller('MainController', function ($scope, $http) {
 		// if item has been added to the cart before
 		else {
 			// always increment item when you add to cart
-			$scope.cart[goodie.id].quantity++;
-			// if goodie is brownie
-			if (goodie.id === 1 && $scope.cart[goodie.id].quantity%4 === 0) {
-				$scope.cart[goodie.id].totalPrice = $scope.cart[goodie.id].quantity/4 * 7;
-				$scope.purchaseTotal += 1;
+			var current = $scope.cart[goodie.id];
+			current.quantity++;
+			// if goodie has bulk discount and is divisible by bulkPricing amount
+			if (current.bulkPricing !== null && current.quantity%current.bulkPricing.amount === 0) {
+				// calculate bulk pricing for goodies
+				var bulkPrice = (current.quantity/current.bulkPricing.amount)*current.bulkPricing.totalPrice;
+				var discount = current.totalPrice - bulkPrice
+				// price of current goody is reassigned with bulk price
+				current.totalPrice = bulkPrice;
+				// minus discounted amount from total bill
+				$scope.purchaseTotal -= discount;
 			}
-			// if goodie is cookie
-			else if (goodie.id === 3 && $scope.cart[goodie.id].quantity%6 === 0) {
-				$scope.cart[goodie.id].totalPrice = $scope.cart[goodie.id].quantity;
-				$scope.purchaseTotal -= 0.25;
-			}
-			// if goodie does not have bulk discount
+			// else goodie does not have bulk discount
 			else {
-				$scope.cart[goodie.id].totalPrice += $scope.cart[goodie.id].price;
-				$scope.purchaseTotal += $scope.cart[goodie.id].price;
+				current.totalPrice += current.price;
+				$scope.purchaseTotal += current.price;
 			}
 		}
 	}
-	
 	// promo code
 	$scope.enterPromo = function () {
-		var code = document.getElementsByTagName("input")[0].value;
-		var cartItems = document.getElementsByClassName('one-item');
+		var promoCode = document.getElementsByTagName("input")[0].value;
 		// promo code must match and cookies must be in the cart to be validated
-		if (code === "COOKIE MONSTER" && $scope.cart[3]) {
+		if (promoCode === "COOKIE MONSTER" && $scope.cart[3]) {
 			$scope.purchaseTotal -= $scope.cart[3].totalPrice;
 			swal("YAY!", "YOUR COOKIES ARE FREE!", "success");
 		}
@@ -61,7 +59,7 @@ app.controller('MainController', function ($scope, $http) {
 
 	// checking out order
 	$scope.checkoutOrder = function () {
-		// if total purchase has a value, check out order
+		// if cart has products, check out order
 		if (Object.keys($scope.cart).length) {
 			$scope.cart = {};
 			$scope.purchaseTotal = 0;
@@ -83,7 +81,6 @@ app.controller('MainController', function ($scope, $http) {
 	$scope.clearItem = function (value) {
 		$scope.purchaseTotal -= $scope.cart[value.id].totalPrice;
 		$scope.cart[value.id].totalPrice = 0;
-		$scope.cart[value.id].quantity = "";
-
+		$scope.cart[value.id].quantity = 0;
 	}
 })
