@@ -44,15 +44,21 @@ app.controller('MainController', function ($scope, $http) {
 			}
 		}
 	}
+	
 	// promo code
 	$scope.enterPromo = function () {
 		var promoCode = document.getElementsByTagName("input")[0].value;
+		var validCodes = {
+			"COOKIE MONSTER": $scope.cart[3],
+			"LIME MONSTER": $scope.cart[2]
+		};
 		// promo code must match and cookies must be in the cart to be validated
-		if (promoCode === "COOKIE MONSTER" && $scope.cart[3]) {
-			$scope.purchaseTotal -= $scope.cart[3].totalPrice;
+		if (validCodes[promoCode]) {
+			$scope.purchaseTotal -= validCodes[promoCode].totalPrice;
+			document.getElementsByClassName('promo-btn')[0].setAttribute('disabled', '');
 			swal("YAY!", "YOUR COOKIES ARE FREE!", "success");
 		}
-		else if (code !== "COOKIE MONSTER"){
+		else {
 			swal("OOPS...", "THAT'S AN INVALID CODE!", "error");
 		}
 	}
